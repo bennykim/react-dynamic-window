@@ -5,8 +5,6 @@ import { ENTRY_TYPE, REACT_DYNAMIC_WINDOW } from '../lib/constants';
 import { getItemStyle } from '../lib/helpers';
 import { renderChildren } from '../lib/utils';
 import { styles } from '../styles';
-import { WindowItem } from './components/WindowItem';
-
 import {
   type ReactDynamicWindowProps,
   createBufferSize,
@@ -14,6 +12,7 @@ import {
   createThreshold,
   createTotalItems,
 } from '../types';
+import { WindowItem } from './components/WindowItem';
 
 function ReactDynamicWindowComponent<T>({
   className,

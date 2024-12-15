@@ -9,7 +9,6 @@ import {
 
 import { ENTRY_TYPE, REACT_DYNAMIC_WINDOW } from '../lib/constants';
 import { createArrayWithValue, getInitialVisibleRange } from '../lib/helpers';
-
 import type { Threshold } from '../types';
 
 export type VisibleRange = {
@@ -149,7 +148,7 @@ export const useReactDynamicWindow = ({
 
   const isItemExpanded = useCallback(
     (index: number) => expandedItemsRef.current[index],
-    [expandedItemsRef.current],
+    [],
   );
 
   const updateItemHeight = useCallback((index: number, newHeight: number) => {

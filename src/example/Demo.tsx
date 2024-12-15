@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import type { ReactDynamicWindowControls } from '../types';
 import { ReactDynamicWindow } from '../ui';
 import { ItemContent, ItemHeader, ScrollToTopButton } from './components';
 import {
@@ -9,8 +10,6 @@ import {
   LOAD_MORE_DELAY,
   MAX_ITEMS,
 } from './mock/data';
-
-import type { ReactDynamicWindowControls } from '../types';
 
 export default function Demo() {
   const [listItems, setListItems] = useState(() =>

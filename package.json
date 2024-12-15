@@ -29,6 +29,9 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.15.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -41,6 +44,8 @@
     "babel-jest": "^29.7.0",
     "clsx": "^2.1.1",
     "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
@@ -56,12 +61,27 @@
     "vite-plugin-dts": "^4.3.0"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.26.0",
-    "@babel/preset-react": "^7.26.3",
-    "@babel/preset-typescript": "^7.26.0",
     "framer-motion": "^11.12.0",
     "lucide-react": "^0.462.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
-  }
+  },
+  "description": "A dynamic windowing component for React applications",
+  "keywords": [
+    "react",
+    "window",
+    "dynamic",
+    "virtual-scroll",
+    "component"
+  ],
+  "author": "mniii",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bennykim/react-dynamic-window"
+  },
+  "bugs": {
+    "url": "https://github.com/bennykim/react-dynamic-window/issues"
+  },
+  "homepage": "https://github.com/bennykim/react-dynamic-window#readme"
 }
