@@ -1,9 +1,5 @@
-function App() {
-  return (
-    <div>
-      <h1>Hello</h1>
-    </div>
-  );
-}
+import Demo from './example/Demo';
 
-export default App;
+export default function App() {
+  return <Demo />;
+}
