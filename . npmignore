@@ -1,0 +1,10 @@
+src/
+tests/
+example/
+.github/
+.gitignore
+.eslintrc
+.eslintignore
+jest.config.js
+vite.config.ts
+tsconfig.json

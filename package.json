@@ -2,31 +2,42 @@
   "name": "react-dynamic-window",
   "version": "1.0.0",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "description": "A React library for efficiently rendering large scrollable lists with dynamic heights",
+  "author": "mniii",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bennykim/react-dynamic-window"
+  },
+  "homepage": "https://github.com/bennykim/react-dynamic-window#readme",
+  "main": "./dist/react-dynamic-window.umd.cjs",
+  "module": "./dist/react-dynamic-window.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
-    "./styles.css": "./dist/styles.css"
+      "import": "./dist/react-dynamic-window.js",
+      "require": "./dist/react-dynamic-window.umd.cjs"
+    }
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc && vite build",
+    "build:types": "tsc --emitDeclarationOnly",
     "test": "jest --verbose",
     "test:c": "jest --coverage",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "preview": "vite preview",
+    "prepublishOnly": "pnpm run clean && pnpm run build"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
@@ -53,9 +64,10 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.1",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.15",
     "ts-jest": "^29.2.5",
-    "typescript": "~5.6.2",
+    "typescript": "~5.6.3",
     "typescript-eslint": "^8.15.0",
     "vite": "^6.0.1",
     "vite-plugin-dts": "^4.3.0"
@@ -66,22 +78,13 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
   },
-  "description": "A dynamic windowing component for React applications",
   "keywords": [
     "react",
+    "virtual",
+    "scroll",
     "window",
     "dynamic",
-    "virtual-scroll",
-    "component"
-  ],
-  "author": "mniii",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bennykim/react-dynamic-window"
-  },
-  "bugs": {
-    "url": "https://github.com/bennykim/react-dynamic-window/issues"
-  },
-  "homepage": "https://github.com/bennykim/react-dynamic-window#readme"
+    "list",
+    "infinite"
+  ]
 }

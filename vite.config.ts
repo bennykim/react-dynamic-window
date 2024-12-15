@@ -7,15 +7,14 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   plugins: [
     react(),
-    dts({
-      insertTypesEntry: true,
-    }),
+    dts({ include: ['src'], insertTypesEntry: true, rollupTypes: true }),
   ],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'js'}`,
+      name: 'ReactDynamicWindow',
+      fileName: 'react-dynamic-window',
+      formats: ['es', 'umd'],
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -26,7 +25,5 @@ export default defineConfig({
         },
       },
     },
-    cssCodeSplit: true,
-    sourcemap: true,
   },
 });
