@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useEffect, useRef } from 'react';
 
 import { renderChildren } from '../../lib/utils';
-
 import type { WindowItemProps } from '../../types';
 
 function WindowItemComponent<T>({

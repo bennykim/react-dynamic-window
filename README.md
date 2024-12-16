@@ -37,21 +37,23 @@ function App() {
   }));
 
   return (
-    <ReactDynamicWindow
-      data={items}
-      itemHeight={150}
-      bufferSize={4}
-      onLoadMore={() => {
-        // Load more items
-      }}
-    >
-      {({ data, isExpanded, onClick }) => (
-        <div onClick={onClick}>
-          <h3>{data.title}</h3>
-          {isExpanded && <p>{data.content}</p>}
-        </div>
-      )}
-    </ReactDynamicWindow>
+    <div style={{ width: '500px' height: '600px' }}>
+      <ReactDynamicWindow
+        data={items}
+        itemHeight={150}
+        bufferSize={4}
+        onLoadMore={() => {
+          // Load more items
+        }}
+      >
+        {({ data, isExpanded, onClick }) => (
+          <div onClick={onClick}>
+            <h3>{data.title}</h3>
+            {isExpanded && <p>{data.content}</p>}
+          </div>
+        )}
+      </ReactDynamicWindow>
+    </div>
   );
 }
 ```

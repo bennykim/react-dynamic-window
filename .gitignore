@@ -1,4 +1,3 @@
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -15,6 +14,10 @@ dist-ssr
 tsconfig.app.tsbuildinfo
 tsconfig.node.tsbuildinfo
 
+coverage
+
+*.tgz
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -26,5 +29,3 @@ tsconfig.node.tsbuildinfo
 *.sln
 *.sw?
 
-# Test
-coverage

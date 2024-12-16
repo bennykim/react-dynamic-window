@@ -11,6 +11,8 @@ import {
   MAX_ITEMS,
 } from './mock/data';
 
+import './demo.css';
+
 export default function Demo() {
   const [listItems, setListItems] = useState(() =>
     generateMockData(0, INITIAL_ITEMS),
@@ -52,11 +54,11 @@ export default function Demo() {
   };
 
   return (
-    <section className="w-full h-screen p-4">
-      <h1 className="mb-4 text-2xl font-bold">Virtualized List Demo</h1>
-      <div className="relative h-[calc(100vh-100px)]">
+    <section className="demo-container">
+      <h1 className="demo-title">Virtualized List Demo</h1>
+      <div className="demo-list-container">
         <ReactDynamicWindow
-          className="p-3 bg-gray-200 border border-black cursor-pointer"
+          className="list-item"
           data={listItems}
           itemHeight={160}
           bufferSize={4}

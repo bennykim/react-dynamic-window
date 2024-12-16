@@ -40,7 +40,7 @@ export type ReactDynamicWindowProps<T> = {
   entryType?: (typeof ENTRY_TYPE)[keyof typeof ENTRY_TYPE];
   hasLatestData?: boolean;
   controls?: ReactDynamicWindowControls;
-  onLoadMore: () => void;
+  onLoadMore?: () => void;
   onLoadLatest?: () => Promise<boolean>;
   children?: WindowItemChildrenProps<T> | React.ReactNode;
 };

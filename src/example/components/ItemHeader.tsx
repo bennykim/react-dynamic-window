@@ -8,14 +8,14 @@ type ItemHeaderProps = {
 };
 
 const Separator = memo(() => (
-  <span className="text-gray-400" aria-hidden="true">
+  <span className="item-header__separator" aria-hidden="true">
     |
   </span>
 ));
 
 const MetaInfo = memo(({ label, value }: { label: string; value: string }) => (
   <span>
-    <span className="font-medium">{label} </span>
+    <span className="item-header__label">{label} </span>
     {value}
   </span>
 ));
@@ -29,10 +29,10 @@ export const ItemHeader = memo(function ItemHeader({
   const HeadingTag = `h${titleLevel}` as const;
 
   return (
-    <header className="space-y-2">
-      <HeadingTag className="text-xl font-semibold">{title}</HeadingTag>
+    <header className="item-header">
+      <HeadingTag className="item-header__title">{title}</HeadingTag>
       {(author || description) && (
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="item-header__meta">
           {author && <MetaInfo label="Author" value={author} />}
           {author && description && <Separator />}
           {description && <MetaInfo label="@" value={description} />}
