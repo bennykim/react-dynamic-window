@@ -5,3 +5,9 @@ export type ListItem = {
   content: string;
   imageUrl?: string;
 };
+
+export type MockGeneratorConfig = {
+  batchSize: number;
+  maxGenerationCount: number;
+  intervalMs: number;
+};
