@@ -21,7 +21,6 @@ export type UseReactDynamicWindowProps = {
   itemHeight: number;
   bufferSize: number;
   threshold: Threshold;
-  entryType: (typeof ENTRY_TYPE)[keyof typeof ENTRY_TYPE];
   hasLatestData?: boolean;
   onLoadMore?: () => void;
   onLoadLatest?: () => Promise<boolean>;
@@ -46,7 +45,6 @@ export const useReactDynamicWindow = ({
   itemHeight,
   bufferSize,
   threshold,
-  entryType,
   hasLatestData,
   onLoadMore,
   onLoadLatest,
@@ -57,6 +55,9 @@ export const useReactDynamicWindow = ({
   const scrollTopRef = useRef(0);
   const expandedItemsRef = useRef<boolean[]>(
     createArrayWithValue(totalItems, false),
+  );
+  const lastLoadTypeRef = useRef<(typeof ENTRY_TYPE)[keyof typeof ENTRY_TYPE]>(
+    ENTRY_TYPE.PREPEND,
   );
 
   const [itemHeights, setItemHeights] = useState<number[]>(() =>
@@ -86,7 +87,7 @@ export const useReactDynamicWindow = ({
             totalItems - prev.length,
             defaultValue,
           );
-          return entryType === ENTRY_TYPE.PREPEND
+          return lastLoadTypeRef.current === ENTRY_TYPE.PREPEND
             ? [...newItems, ...prev]
             : [...prev, ...newItems];
         }
@@ -98,7 +99,7 @@ export const useReactDynamicWindow = ({
     };
 
     if (
-      entryType === ENTRY_TYPE.PREPEND &&
+      lastLoadTypeRef.current === ENTRY_TYPE.PREPEND &&
       totalItems > previousTotalRef.current
     ) {
       handlePrependScroll();
@@ -107,7 +108,7 @@ export const useReactDynamicWindow = ({
     updateArrays();
     previousTotalRef.current = totalItems;
     isLoadingRef.current = false;
-  }, [totalItems, itemHeight, entryType]);
+  }, [totalItems, itemHeight]);
 
   useEffect(() => {
     const checkTopAndLatestData = async () => {
@@ -120,6 +121,7 @@ export const useReactDynamicWindow = ({
 
       if (isAtTop && hasLatestData) {
         isLoadingRef.current = true;
+
         try {
           const hasMoreData = await onLoadLatest();
           if (!hasMoreData) {
@@ -223,6 +225,7 @@ export const useReactDynamicWindow = ({
       scrollTopRef.current = scrollTop;
 
       if (onLoadMore && bottomScrollPercentage > threshold) {
+        lastLoadTypeRef.current = ENTRY_TYPE.APPEND;
         isLoadingRef.current = true;
         onLoadMore();
         return;
@@ -233,7 +236,9 @@ export const useReactDynamicWindow = ({
         isScrollingUp &&
         scrollTop / scrollHeight < 1 - threshold
       ) {
+        lastLoadTypeRef.current = ENTRY_TYPE.PREPEND;
         isLoadingRef.current = true;
+
         try {
           const hasMoreData = await onLoadLatest();
           if (!hasMoreData) {

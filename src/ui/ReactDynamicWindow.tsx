@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect } from 'react';
 
 import { useReactDynamicWindow, useSequenceData } from '../hooks';
-import { ENTRY_TYPE, REACT_DYNAMIC_WINDOW } from '../lib/constants';
+import { REACT_DYNAMIC_WINDOW } from '../lib/constants';
 import { getItemStyle } from '../lib/helpers';
 import { renderChildren } from '../lib/utils';
 import { styles } from '../styles';
@@ -20,7 +20,6 @@ function ReactDynamicWindowComponent<T>({
   itemHeight = REACT_DYNAMIC_WINDOW.DEFAULT_ITEM_HEIGHT,
   bufferSize = REACT_DYNAMIC_WINDOW.DEFAULT_BUFFER_SIZE,
   threshold = REACT_DYNAMIC_WINDOW.DEFAULT_THRESHOLD,
-  entryType = ENTRY_TYPE.APPEND,
   hasLatestData,
   controls,
   onLoadMore,
@@ -32,7 +31,6 @@ function ReactDynamicWindowComponent<T>({
     itemHeight: createItemHeight(itemHeight),
     bufferSize: createBufferSize(bufferSize),
     threshold: createThreshold(threshold),
-    entryType,
     hasLatestData,
     onLoadMore,
     onLoadLatest,
@@ -66,7 +64,7 @@ function ReactDynamicWindowComponent<T>({
     <div
       ref={reactDynamicWindow.containerRef}
       style={styles.container}
-      onScrollCapture={handleScroll}
+      onScroll={handleScroll}
     >
       <ul style={getListStyle()}>
         {visibleData.map((item, index) => {
