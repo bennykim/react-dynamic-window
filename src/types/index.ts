@@ -1,5 +1,3 @@
-import { ENTRY_TYPE } from '../lib/constants';
-
 export * from './bufferSize';
 export * from './itemHeight';
 export * from './threshold';
@@ -37,7 +35,6 @@ export type ReactDynamicWindowProps<T> = {
   itemHeight?: number;
   bufferSize?: number;
   threshold?: number;
-  entryType?: (typeof ENTRY_TYPE)[keyof typeof ENTRY_TYPE];
   hasLatestData?: boolean;
   controls?: ReactDynamicWindowControls;
   onLoadMore?: () => void;
