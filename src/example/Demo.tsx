@@ -80,7 +80,7 @@ export default function Demo() {
 
   return (
     <section className="demo-container">
-      <h1 className="demo-title">Virtualized List Demo</h1>
+      <h1 className="demo-title">React-Dynamic-Window</h1>
       <div className="demo-status-container">
         <GenerationStatus count={generationCount} />
       </div>

@@ -28,14 +28,16 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "pnpm build:lib && pnpm build:app",
+    "build:lib": "tsc && vite build --mode lib",
+    "build:app": "tsc && vite build --mode app",
     "build:types": "tsc --emitDeclarationOnly",
     "test": "jest --verbose",
     "test:c": "jest --coverage",
     "lint": "eslint src/**/*.{ts,tsx}",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist",
-    "prepublishOnly": "pnpm clean && pnpm test && pnpm lint && pnpm build"
+    "clean": "rimraf dist dist-app",
+    "prepublishOnly": "pnpm clean && pnpm test && pnpm lint && pnpm build:lib"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",

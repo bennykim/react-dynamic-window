@@ -2,6 +2,10 @@
 
 React virtualization library for efficiently rendering large scrollable lists with dynamic heights and expandable content.
 
+## 🎮 Demo
+
+Check out the live demo: [https://rdw.surge.sh/](https://rdw.surge.sh/)
+
 ## ✨ Features
 
 - 🚀 **Virtualized Rendering**: Only renders items that are visible in the viewport, optimizing performance for large lists
