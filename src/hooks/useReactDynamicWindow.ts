@@ -53,6 +53,7 @@ export const useReactDynamicWindow = ({
   const isLoadingRef = useRef(false);
   const previousTotalRef = useRef(totalItems);
   const scrollTopRef = useRef(0);
+  const isManualScrollRef = useRef(false);
   const expandedItemsRef = useRef<boolean[]>(
     createArrayWithValue(totalItems, false),
   );
@@ -66,6 +67,12 @@ export const useReactDynamicWindow = ({
   const [visibleRange, setVisibleRange] = useState<VisibleRange>(() =>
     getInitialVisibleRange(containerRef, itemHeight, bufferSize, totalItems),
   );
+
+  useEffect(() => {
+    return () => {
+      isManualScrollRef.current = false;
+    };
+  }, [totalItems]);
 
   useLayoutEffect(() => {
     const handlePrependScroll = () => {
@@ -100,7 +107,8 @@ export const useReactDynamicWindow = ({
 
     if (
       lastLoadTypeRef.current === ENTRY_TYPE.PREPEND &&
-      totalItems > previousTotalRef.current
+      totalItems > previousTotalRef.current &&
+      !isManualScrollRef.current
     ) {
       handlePrependScroll();
     }
@@ -258,7 +266,10 @@ export const useReactDynamicWindow = ({
 
   const scrollToTop = useCallback((scrollOptions?: ScrollToOptions) => {
     const scrollElement = containerRef.current;
+
     if (scrollElement) {
+      isManualScrollRef.current = true;
+
       const defaultOptions: ScrollToOptions = {
         top: 0,
         behavior: 'auto',
