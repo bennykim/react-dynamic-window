@@ -1,3 +1,5 @@
+import styles from './ScrollToTopButton.module.css';
+
 type ScrollToTopButtonProps = {
   onClick: () => void;
 };
@@ -5,7 +7,7 @@ type ScrollToTopButtonProps = {
 export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
   onClick,
 }) => (
-  <button className="scroll-top-button" onClick={onClick}>
+  <button className={styles.button} onClick={onClick}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={24}

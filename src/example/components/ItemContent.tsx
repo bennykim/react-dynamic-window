@@ -1,5 +1,7 @@
 import { memo, useState } from 'react';
 
+import styles from './ItemContent.module.css';
+
 type ItemContentProps = {
   url?: string;
   content?: string;
@@ -21,7 +23,7 @@ const Image = memo(function Image({
     <img
       src={url}
       alt={alt}
-      className="dynamic-image"
+      className={styles.image}
       loading="lazy"
       onLoad={onLoad}
     />
@@ -34,7 +36,7 @@ const LoadingState = memo(function LoadingState({
   enabled: boolean;
 }) {
   return (
-    <div className={`loading-state ${!enabled ? 'loading-state--hidden' : ''}`}>
+    <div className={`${styles.loading} ${!enabled ? styles.hidden : ''}`}>
       Loading...
     </div>
   );
@@ -51,10 +53,10 @@ export const ItemContent = memo(function ItemContent({
 
   return (
     <div
-      className="item-content"
+      className={styles.content}
       style={{ maxHeight: isExpanded ? maxExpandedHeight : '0' }}
     >
-      {content && <p className="item-content__paragraph">{content}</p>}
+      {content && <p className={styles.paragraph}>{content}</p>}
       {url && (
         <>
           <LoadingState enabled={isLoading} />

@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  padding: 1rem;
+  min-width: 800px;
+  overflow: auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  height: calc(100% - 70px);
+  gap: 2rem;
+}
+
+.list {
+  flex: 1;
+  position: relative;
+}
+
+.controls {
+  flex: 1;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem;
+}

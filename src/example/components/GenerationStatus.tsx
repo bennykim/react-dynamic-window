@@ -1,14 +1,15 @@
+import styles from './GenerationStatus.module.css';
+
 type GenerationStatusProps = {
   count: number;
 };
 
 const GenerationStatus = ({ count }: GenerationStatusProps) => {
-  const countClassName =
-    count > 0 ? 'demo-status-count' : 'demo-status-finished';
+  const countClassName = count > 0 ? styles.count : styles.finished;
 
   return (
-    <div className="demo-status">
-      <span className="demo-status-label">Auto Generation Remaining:</span>
+    <div className={styles.status}>
+      <span className={styles.label}>Auto Generation Remaining:</span>
       <span className={countClassName}>{count}</span>
     </div>
   );

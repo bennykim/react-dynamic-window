@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import styles from './ItemHeader.module.css';
+
 type ItemHeaderProps = {
   title: string;
   author?: string;
@@ -8,14 +10,14 @@ type ItemHeaderProps = {
 };
 
 const Separator = memo(() => (
-  <span className="item-header__separator" aria-hidden="true">
+  <span className={styles.separator} aria-hidden="true">
     |
   </span>
 ));
 
 const MetaInfo = memo(({ label, value }: { label: string; value: string }) => (
   <span>
-    <span className="item-header__label">{label} </span>
+    <span className={styles.label}>{label} </span>
     {value}
   </span>
 ));
@@ -29,10 +31,10 @@ export const ItemHeader = memo(function ItemHeader({
   const HeadingTag = `h${titleLevel}` as const;
 
   return (
-    <header className="item-header">
-      <HeadingTag className="item-header__title">{title}</HeadingTag>
+    <header className={styles.header}>
+      <HeadingTag className={styles.title}>{title}</HeadingTag>
       {(author || description) && (
-        <div className="item-header__meta">
+        <div className={styles.meta}>
           {author && <MetaInfo label="Author" value={author} />}
           {author && description && <Separator />}
           {description && <MetaInfo label="@" value={description} />}

@@ -2,7 +2,12 @@ import { useCallback, useMemo, useState } from 'react';
 
 import type { ReactDynamicWindowControls } from '../types';
 import { ReactDynamicWindow } from '../ui';
-import { ItemContent, ItemHeader, ScrollToTopButton } from './components';
+import {
+  ItemContainer,
+  ItemContent,
+  ItemHeader,
+  ScrollToTopButton,
+} from './components';
 import GenerationStatus from './components/GenerationStatus';
 import { useAutoGenerateMockData } from './hooks/useAutoGenerateMockData';
 import {
@@ -13,8 +18,8 @@ import {
   MAX_ITEMS,
 } from './mock/data';
 import type { ListItem } from './types';
-
-import './demo.css';
+// eslint-disable-next-line import/order
+import styles from './Demo.module.css';
 
 export default function Demo() {
   const [listItems, setListItems] = useState(() =>
@@ -79,38 +84,39 @@ export default function Demo() {
   };
 
   return (
-    <section className="demo-container">
-      <h1 className="demo-title">React-Dynamic-Window</h1>
-      <div className="demo-status-container">
-        <GenerationStatus count={generationCount} />
-      </div>
-      <div className="demo-list-container">
-        <ReactDynamicWindow
-          className="list-item"
-          data={listItems}
-          itemHeight={160}
-          bufferSize={4}
-          controls={controls}
-          hasLatestData={latestItems.length > 0}
-          onLoadLatest={handleLatestLoad}
-          onLoadMore={handleLoadMore}
-        >
-          {({ data: item, isExpanded, onClick }) => (
-            <article onClick={wrapItemClick(onClick)}>
-              <ItemHeader
-                title={item.title}
-                author={item.author}
-                description={item.description}
-              />
-              <ItemContent
-                content={item.content}
-                url={item.imageUrl}
-                isExpanded={isExpanded}
-              />
-            </article>
-          )}
-        </ReactDynamicWindow>
-        <ScrollToTopButton onClick={handleScrollToTop} />
+    <section className={styles.container}>
+      <h1 className={styles.title}>React Dynamic Window</h1>
+      <div className={styles.content}>
+        <div className={styles.list}>
+          <ReactDynamicWindow
+            data={listItems}
+            itemHeight={160}
+            bufferSize={4}
+            controls={controls}
+            hasLatestData={latestItems.length > 0}
+            onLoadLatest={handleLatestLoad}
+            onLoadMore={handleLoadMore}
+          >
+            {({ data: item, isExpanded, onClick }) => (
+              <ItemContainer onClick={wrapItemClick(onClick)}>
+                <ItemHeader
+                  title={item.title}
+                  author={item.author}
+                  description={item.description}
+                />
+                <ItemContent
+                  content={item.content}
+                  url={item.imageUrl}
+                  isExpanded={isExpanded}
+                />
+              </ItemContainer>
+            )}
+          </ReactDynamicWindow>
+          <ScrollToTopButton onClick={handleScrollToTop} />
+        </div>
+        <div className={styles.controls}>
+          <GenerationStatus count={generationCount} />
+        </div>
       </div>
     </section>
   );
