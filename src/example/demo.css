@@ -14,25 +14,31 @@
   font-weight: bold;
 }
 
-.demo-status-container {
+.demo-status {
   display: flex;
   justify-content: flex-end;
-  margin-right: 1rem;
+  align-items: center;
+  margin-right: 1.5rem;
+  gap: 4px;
+  padding: 6px 0;
 }
 
-.demo-status {
-  display: inline-flex;
+.demo-status-label {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #4b5563;
 }
 
-.status-complete {
-  color: #10b981;
+.demo-status-count {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2563eb;
 }
 
-.status-remaining {
-  color: #f59e0b;
+.demo-status-finished {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: red;
 }
 
 .demo-list-container {

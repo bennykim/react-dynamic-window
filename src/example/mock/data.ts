@@ -1,9 +1,9 @@
 import type { ListItem } from '../types';
 
 export const IMAGE_URL = 'https://picsum.photos/200';
-export const MAX_ITEMS = 1000;
-export const INITIAL_ITEMS = 100;
-export const LOAD_MORE_COUNT = 100;
+export const MAX_ITEMS = 500;
+export const INITIAL_ITEMS = 50;
+export const LOAD_MORE_COUNT = 50;
 export const LOAD_MORE_DELAY = 500;
 
 export const generateMockData = (

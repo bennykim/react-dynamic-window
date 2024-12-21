@@ -4,7 +4,6 @@ import { generateMockData } from '../mock/data';
 import type { ListItem, MockGeneratorConfig } from '../types';
 
 const DEFAULT_CONFIG: MockGeneratorConfig = {
-  batchSize: 1,
   maxGenerationCount: 5,
   intervalMs: 5000,
 };
@@ -13,7 +12,7 @@ export const useAutoGenerateMockData = (
   config: Partial<MockGeneratorConfig> = {},
   onDataGenerated: (newData: ListItem[]) => void,
 ) => {
-  const { batchSize, maxGenerationCount, intervalMs } = {
+  const { maxGenerationCount, intervalMs } = {
     ...DEFAULT_CONFIG,
     ...config,
   };
@@ -24,7 +23,7 @@ export const useAutoGenerateMockData = (
     const generateData = () => {
       const newData = generateMockData(
         maxGenerationCount - generationCount,
-        batchSize,
+        1,
         'New',
       );
 
@@ -43,7 +42,7 @@ export const useAutoGenerateMockData = (
     return () => {
       clearInterval(intervalId);
     };
-  }, [batchSize, maxGenerationCount, intervalMs, onDataGenerated]);
+  }, [maxGenerationCount, intervalMs, onDataGenerated]);
 
   return {
     generationCount,

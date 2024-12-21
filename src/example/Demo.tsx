@@ -3,6 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import type { ReactDynamicWindowControls } from '../types';
 import { ReactDynamicWindow } from '../ui';
 import { ItemContent, ItemHeader, ScrollToTopButton } from './components';
+import GenerationStatus from './components/GenerationStatus';
 import { useAutoGenerateMockData } from './hooks/useAutoGenerateMockData';
 import {
   generateMockData,
@@ -21,9 +22,8 @@ export default function Demo() {
   );
   const [latestItems, setLatestItems] = useState<ListItem[]>([]);
 
-  const { isCompleted, generationCount } = useAutoGenerateMockData(
+  const { generationCount } = useAutoGenerateMockData(
     {
-      batchSize: 1,
       maxGenerationCount: 5,
       intervalMs: 3000,
     },
@@ -82,11 +82,7 @@ export default function Demo() {
     <section className="demo-container">
       <h1 className="demo-title">Virtualized List Demo</h1>
       <div className="demo-status-container">
-        {isCompleted ? (
-          <p className="demo-status status-complete">Generation Complete </p>
-        ) : (
-          <p className="demo-status">Generating : {generationCount}</p>
-        )}
+        <GenerationStatus count={generationCount} />
       </div>
       <div className="demo-list-container">
         <ReactDynamicWindow
@@ -96,8 +92,8 @@ export default function Demo() {
           bufferSize={4}
           controls={controls}
           hasLatestData={latestItems.length > 0}
-          onLoadMore={handleLoadMore}
           onLoadLatest={handleLatestLoad}
+          onLoadMore={handleLoadMore}
         >
           {({ data: item, isExpanded, onClick }) => (
             <article onClick={wrapItemClick(onClick)}>

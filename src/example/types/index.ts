@@ -7,7 +7,6 @@ export type ListItem = {
 };
 
 export type MockGeneratorConfig = {
-  batchSize: number;
   maxGenerationCount: number;
   intervalMs: number;
 };
