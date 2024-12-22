@@ -9,4 +9,7 @@ export type ListItem = {
 export type MockGeneratorConfig = {
   maxGenerationCount: number;
   intervalMs: number;
+  autoStart: boolean;
 };
+
+export type ControlGenerationAction = 'start' | 'stop' | 'reset';

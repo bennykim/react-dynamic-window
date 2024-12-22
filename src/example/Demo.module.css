@@ -20,14 +20,23 @@
 }
 
 .list {
-  flex: 1;
+  flex-grow: 1;
   position: relative;
 }
 
 .controls {
-  flex: 1;
   display: flex;
+  width: 420px;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 1rem;
+}
+
+.window {
+  background-color: floralwhite;
+}
+
+.window:hover {
+  cursor: pointer;
+  background-color: hotpink;
 }

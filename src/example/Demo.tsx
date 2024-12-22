@@ -3,21 +3,20 @@ import { useCallback, useMemo, useState } from 'react';
 import type { ReactDynamicWindowControls } from '../types';
 import { ReactDynamicWindow } from '../ui';
 import {
+  ConfigurationPanel,
   ItemContainer,
   ItemContent,
   ItemHeader,
   ScrollToTopButton,
 } from './components';
-import GenerationStatus from './components/GenerationStatus';
 import { useAutoGenerateMockData } from './hooks/useAutoGenerateMockData';
 import {
   generateMockData,
   INITIAL_ITEMS,
-  LOAD_MORE_COUNT,
-  LOAD_MORE_DELAY,
+  INITIAL_WINDOW_CONFIG,
   MAX_ITEMS,
 } from './mock/data';
-import type { ListItem } from './types';
+import type { ControlGenerationAction, ListItem } from './types';
 // eslint-disable-next-line import/order
 import styles from './Demo.module.css';
 
@@ -26,16 +25,41 @@ export default function Demo() {
     generateMockData(0, INITIAL_ITEMS),
   );
   const [latestItems, setLatestItems] = useState<ListItem[]>([]);
+  const [windowConfig, setWindowConfig] = useState(INITIAL_WINDOW_CONFIG);
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const { generationCount } = useAutoGenerateMockData(
-    {
-      maxGenerationCount: 5,
-      intervalMs: 3000,
-    },
-    (newData) => {
-      setLatestItems((prev) => [...newData, ...prev]);
-    },
-  );
+  const { generationCount, startGeneration, stopGeneration, resetGeneration } =
+    useAutoGenerateMockData(
+      {
+        maxGenerationCount: windowConfig.maxGenerationCount,
+        intervalMs: windowConfig.intervalMs,
+        autoStart: false,
+      },
+      (newData) => {
+        setLatestItems((prev) => [...newData, ...prev]);
+      },
+    );
+
+  const handleGenerationControl = (action: ControlGenerationAction) => {
+    switch (action) {
+      case 'start':
+        startGeneration();
+        setIsGenerating(true);
+        break;
+      case 'stop':
+        stopGeneration();
+        setIsGenerating(false);
+        break;
+      case 'reset':
+        resetGeneration();
+        setIsGenerating(false);
+        break;
+    }
+  };
+
+  const handleConfigUpdate = (newConfig: typeof windowConfig) => {
+    setWindowConfig(newConfig);
+  };
 
   const handleLatestLoad = useCallback(async () => {
     if (latestItems.length === 0) {
@@ -53,14 +77,20 @@ export default function Demo() {
       return false;
     }
 
-    await new Promise((resolve) => setTimeout(resolve, LOAD_MORE_DELAY));
+    await new Promise((resolve) =>
+      setTimeout(resolve, windowConfig.loadMoreDelay),
+    );
     setListItems((prev) => [
       ...prev,
-      ...generateMockData(prev.length, LOAD_MORE_COUNT),
+      ...generateMockData(prev.length, windowConfig.loadMoreCount),
     ]);
 
     return true;
-  }, [listItems.length]);
+  }, [
+    listItems.length,
+    windowConfig.loadMoreCount,
+    windowConfig.loadMoreDelay,
+  ]);
 
   const controls = useMemo<ReactDynamicWindowControls>(
     () => ({
@@ -90,9 +120,10 @@ export default function Demo() {
       <div className={styles.content}>
         <div className={styles.list}>
           <ReactDynamicWindow
+            className={styles.window}
             data={listItems}
-            itemHeight={160}
-            bufferSize={4}
+            itemHeight={windowConfig.itemHeight}
+            bufferSize={windowConfig.bufferSize}
             controls={controls}
             hasLatestData={latestItems.length > 0}
             onLoadLatest={handleLatestLoad}
@@ -116,7 +147,13 @@ export default function Demo() {
           <ScrollToTopButton onClick={handleScrollToTop} />
         </div>
         <div className={styles.controls}>
-          <GenerationStatus count={generationCount} />
+          <ConfigurationPanel
+            count={generationCount}
+            onUpdateConfig={handleConfigUpdate}
+            initialConfig={windowConfig}
+            onControlGeneration={handleGenerationControl}
+            isGenerating={isGenerating}
+          />
         </div>
       </div>
     </section>
