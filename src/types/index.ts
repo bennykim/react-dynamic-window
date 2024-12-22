@@ -26,7 +26,7 @@ export type WindowItemProps<T> = {
 };
 
 export type ReactDynamicWindowControls = {
-  scrollToTop: (props: ScrollToOptions) => void;
+  scrollToTop: (props: ScrollToOptions) => () => void;
 };
 
 export type ReactDynamicWindowProps<T> = {

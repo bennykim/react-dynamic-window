@@ -48,9 +48,16 @@ function ReactDynamicWindowComponent<T>({
 
   useEffect(() => {
     if (controls && controls.scrollToTop) {
-      controls.scrollToTop = reactDynamicWindow.scrollToTop;
+      const originalScrollToTop = controls.scrollToTop;
+
+      controls.scrollToTop = (options: ScrollOptions) => () => {
+        const originalFn = originalScrollToTop(options);
+        originalFn();
+
+        reactDynamicWindow.scrollToTop(options);
+      };
     }
-  }, [controls, reactDynamicWindow.scrollToTop]);
+  }, [controls, reactDynamicWindow]);
 
   const getListStyle = useCallback(
     () => ({

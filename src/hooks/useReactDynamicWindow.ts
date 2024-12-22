@@ -265,17 +265,18 @@ export const useReactDynamicWindow = ({
     handleInfiniteScroll();
   }, [calculateVisibleRangeChunked, onLoadMore, onLoadLatest, threshold]);
 
-  const scrollToTop = useCallback((scrollOptions?: ScrollToOptions) => {
+  const scrollToTop = useCallback((options?: ScrollToOptions) => {
     const scrollElement = containerRef.current;
 
     if (scrollElement) {
       isManualScrollRef.current = true;
 
-      const defaultOptions: ScrollToOptions = {
+      const defaultOptions = {
         top: 0,
-        behavior: 'auto',
+        behavior: 'auto' as const,
+        ...options,
       };
-      scrollElement.scrollTo(scrollOptions || defaultOptions);
+      scrollElement.scrollTo(defaultOptions);
     }
   }, []);
 

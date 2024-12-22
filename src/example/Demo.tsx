@@ -64,23 +64,24 @@ export default function Demo() {
 
   const controls = useMemo<ReactDynamicWindowControls>(
     () => ({
-      scrollToTop: () => {
+      scrollToTop: () => () => {
         console.log('Scroll to top');
       },
     }),
     [],
   );
 
-  const wrapItemClick = (onClick: () => void) => () => {
-    onClick();
-    console.log('Item clicked');
-  };
-
   const handleScrollToTop = () => {
-    controls.scrollToTop({
+    const scrollFn = controls.scrollToTop({
       top: 0,
       behavior: 'smooth',
     });
+    scrollFn();
+  };
+
+  const wrapItemClick = (onClick: () => void) => () => {
+    onClick();
+    console.log('Item clicked');
   };
 
   return (
