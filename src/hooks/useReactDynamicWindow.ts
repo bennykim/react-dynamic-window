@@ -10,6 +10,7 @@ import {
 import { ENTRY_TYPE, REACT_DYNAMIC_WINDOW } from '../lib/constants';
 import { createArrayWithValue, getInitialVisibleRange } from '../lib/helpers';
 import type { Threshold } from '../types';
+import { useThrottle } from './useThrottle';
 
 export type VisibleRange = {
   start: number;
@@ -218,7 +219,7 @@ export const useReactDynamicWindow = ({
     };
   }, [itemHeights, bufferSize]);
 
-  const handleScroll = useCallback(() => {
+  const handleScrollBase = useCallback(() => {
     const handleInfiniteScroll = async () => {
       const scrollElement = containerRef.current;
 
@@ -278,10 +279,14 @@ export const useReactDynamicWindow = ({
     }
   }, []);
 
+  const handleScroll = useThrottle(handleScrollBase, 100);
+
+  const expandedItems = expandedItemsRef.current;
+
   return {
     visibleRange,
     containerRef,
-    expandedItems: expandedItemsRef.current,
+    expandedItems,
     totalHeight,
     itemHeights,
     handleScroll,
