@@ -105,15 +105,21 @@ You can control the scroll behavior externally using the controls prop:
 
 ```tsx
 const controls = {
-  scrollToTop: () => void, // Will be populated by the component
+  scrollToTop: () => () => void,
+  // First function (provided by component) handles the scroll behavior
+  // Second function (user-defined) can be used for custom actions
 };
 
-<ReactDynamicWindow controls={controls} data={items}>
+<ReactDynamicWindow
+  controls={controls}
+  data={items}
+>
   {/* ... */}
-</ReactDynamicWindow>;
+</ReactDynamicWindow>
 
 // Later in your code
-controls.scrollToTop({ behavior: 'smooth' });
+const scrollFn = controls.scrollToTop({ behavior: 'smooth' });
+scrollFn(); // Execute the returned function
 ```
 
 ### Infinite Loading
