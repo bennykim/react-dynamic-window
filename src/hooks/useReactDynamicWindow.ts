@@ -280,7 +280,7 @@ export const useReactDynamicWindow = ({
     }
   }, []);
 
-  const handleScroll = useThrottle(handleScrollBase, 100);
+  const handleScroll = useThrottle(handleScrollBase, 50);
 
   const expandedItems = expandedItemsRef.current;
 

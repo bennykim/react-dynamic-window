@@ -7,8 +7,8 @@ export const LOAD_MORE_COUNT = 50;
 export const LOAD_MORE_DELAY = 500;
 
 export const INITIAL_WINDOW_CONFIG = {
-  itemHeight: 160,
-  bufferSize: 4,
+  itemHeight: 120,
+  bufferSize: 6,
   maxGenerationCount: 5,
   intervalMs: 3000,
   loadMoreDelay: 1000,

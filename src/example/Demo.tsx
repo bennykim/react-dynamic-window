@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import packageJson from '../../package.json';
 import type { ReactDynamicWindowControls } from '../types';
 import { ReactDynamicWindow } from '../ui';
 import {
@@ -19,6 +20,8 @@ import {
 import type { ControlGenerationAction, ListItem } from './types';
 // eslint-disable-next-line import/order
 import styles from './Demo.module.css';
+
+const VERSION = packageJson.version;
 
 export default function Demo() {
   const [listItems, setListItems] = useState(() =>
@@ -116,7 +119,29 @@ export default function Demo() {
 
   return (
     <section className={styles.container}>
-      <h1 className={styles.title}>React Dynamic Window</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>
+          <a className={styles.home} href="https://rdw.surge.sh">
+            React Dynamic Window
+          </a>
+        </h1>
+        <a
+          className={styles.version}
+          href="https://www.npmjs.com/package/react-dynamic-window"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          v{VERSION}
+        </a>
+        <a
+          className={styles.link}
+          href="https://github.com/bennykim/react-dynamic-window"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Github
+        </a>
+      </div>
       <div className={styles.content}>
         <div className={styles.list}>
           <ReactDynamicWindow
