@@ -1,4 +1,7 @@
+import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+
 import { ENTRY_TYPE } from '../../lib/constants';
 import type {
   ReactDynamicWindowControls,
@@ -128,16 +131,22 @@ describe('ReactDynamicWindow Component', () => {
       });
 
       const controls: ReactDynamicWindowControls = {
-        scrollToTop: (options) => {
-          (container.firstChild as HTMLElement).scrollTo(options);
+        scrollToTop: (options) => () => {
+          (container.firstChild as HTMLElement).scrollTo({
+            top: 0,
+            behavior: 'auto',
+            ...options,
+          });
         },
       };
 
       act(() => {
-        controls.scrollToTop({ behavior: 'smooth' });
+        const scrollToTopFn = controls.scrollToTop({ behavior: 'smooth' });
+        scrollToTopFn();
       });
 
       expect(mockScrollTo).toHaveBeenCalledWith({
+        top: 0,
         behavior: 'smooth',
       });
     });

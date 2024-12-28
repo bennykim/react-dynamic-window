@@ -1,7 +1,16 @@
+import { ENTRY_TYPE } from '../lib/constants';
+
 export * from './bufferSize';
 export * from './itemHeight';
 export * from './threshold';
 export * from './totalItems';
+
+export type VisibleRange = {
+  start: number;
+  end: number;
+};
+
+export type LoadType = (typeof ENTRY_TYPE)[keyof typeof ENTRY_TYPE];
 
 export type WithSequence<T> = T & {
   sequence: number;

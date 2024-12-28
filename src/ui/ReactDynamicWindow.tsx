@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect } from 'react';
 
-import { useReactDynamicWindow, useSequenceData } from '../hooks';
+import { useReactDynamicWindow } from '../hooks';
+import { useSequenceData } from '../hooks/composition';
 import { REACT_DYNAMIC_WINDOW } from '../lib/constants';
 import { getItemStyle } from '../lib/helpers';
 import { renderChildren } from '../lib/utils';

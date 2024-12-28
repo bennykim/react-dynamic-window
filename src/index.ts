@@ -1,7 +1,7 @@
 export { ReactDynamicWindow } from './ui/ReactDynamicWindow';
 
-export { useReactDynamicWindow } from './hooks/useReactDynamicWindow';
-export { useSequenceData } from './hooks/useSequenceData';
+export { useReactDynamicWindow } from './hooks';
+export { useSequenceData } from './hooks/composition';
 
 export type {
   BufferSize,

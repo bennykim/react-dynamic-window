@@ -1,8 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
-
-import { WindowItem } from '../components/WindowItem';
+import React from 'react';
 
 import type { WindowItemProps, WithSequence } from '../../types';
+import { WindowItem } from '../components/WindowItem';
 
 interface TestItem {
   title: string;

@@ -5,7 +5,7 @@ import { createThreshold } from '../../types';
 import {
   useReactDynamicWindow,
   type UseReactDynamicWindowProps,
-} from '../useReactDynamicWindow';
+} from '../index';
 
 describe('useReactDynamicWindow', () => {
   const mockProps: UseReactDynamicWindowProps = {
@@ -13,7 +13,6 @@ describe('useReactDynamicWindow', () => {
     itemHeight: 50,
     bufferSize: 5,
     threshold: createThreshold(0.9),
-    entryType: ENTRY_TYPE.APPEND,
   };
 
   beforeEach(() => {
