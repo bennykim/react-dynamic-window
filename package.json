@@ -1,6 +1,6 @@
 {
   "name": "react-dynamic-window",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "description": "A React library for efficiently rendering large scrollable lists with dynamic heights",
   "author": "mniii",
