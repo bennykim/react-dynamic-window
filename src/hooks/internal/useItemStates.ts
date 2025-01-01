@@ -96,7 +96,10 @@ export const useItemStates = ({
       expandedItemsRef.current,
       false,
     );
-  }, [totalItems, itemHeight, loadType]);
+    /* eslint-disable react-hooks/exhaustive-deps */
+    // loadType is excluded from the dependency array since it is only used to determine
+    // how to initialize item states and its changes should not trigger callback recreation
+  }, [totalItems, itemHeight]);
 
   return {
     itemHeights,
