@@ -2,9 +2,7 @@
 
 React virtualization library for efficiently rendering large scrollable lists with dynamic heights and expandable content.
 
-## 🎮 Demo
-
-Check out the live demo: [https://rdw.surge.sh/](https://rdw.surge.sh/)
+### 🚀 [Live Demo](https://react-dynamic-window.netlify.app/)
 
 ## ✨ Features
 
